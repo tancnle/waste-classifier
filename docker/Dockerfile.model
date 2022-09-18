@@ -1,0 +1,11 @@
+FROM tensorflow/serving:2.7.3
+
+# Define arguments to build the image
+ARG MODEL_NAME
+ARG MODEL_VERSION
+ARG MODELS_DIR="models"
+
+# Embed the model of the given version
+ENV MODEL_TARGET=$MODEL_NAME/$MODEL_VERSION
+COPY $MODELS_DIR/$MODEL_TARGET/serving /models/$MODEL_TARGET
+COPY $MODELS_DIR/$MODEL_TARGET/model-serving.config /models/models.config
