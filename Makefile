@@ -7,6 +7,7 @@ DOCKER_CONFIG_TPL_DIR := ${DOCKER_DIR}/templates
 # Variables
 PYTHONPATH ?= ${SOURCE_DIR}/src
 MODEL_NAME ?= "smart-recycling"
+MODEL_VERSION ?= 1
 CONFIG_FILE ?= "config.json"
 MODEL_LABEL ?= "test"
 
@@ -19,7 +20,7 @@ dockerize-model: ${MODELS_DIR}/${MODEL_NAME}/${MODEL_VERSION}/model-serving.conf
 dockerize-model: DOCKER_VERSION = ${MODEL_VERSION}
 dockerize-model:
 	docker buildx build --no-cache --platform linux/amd64 \
-		--tag model-smart-recycling:${DOCKER_VERSION} \
+		--tag ${MODEL_NAME}:${DOCKER_VERSION} \
 		--build-arg MODEL_NAME=${MODEL_NAME} \
 		--build-arg MODEL_VERSION=${MODEL_VERSION} \
 		--file ${DOCKER_DIR}/Dockerfile.model \
@@ -30,3 +31,9 @@ dockerize-model:
 		-e "s/{{model_version}}/${MODEL_VERSION}/g" \
 		-e "s/{{model_label}}/${MODEL_LABEL}/g" \
 		 ${DOCKER_CONFIG_TPL_DIR}/model-serving.config.tpl > $@
+
+.PHONE: run
+run:
+	docker run -it --rm -p 8501:8501 ${MODEL_NAME}:${MODEL_VERSION} \
+		--allow_version_labels_for_unavailable_models \
+		--model_config_file=/models/models.config

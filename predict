@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+
+import numpy as np
+import json
+import sys
+import requests
+
+from PIL import Image
+import tensorflow as tf
+
+
+def build_request(image_path):
+    dim = (299, 299)
+
+    image = Image.open(image_path)
+    image_np = np.array(image)
+    image_np = tf.expand_dims(tf.cast(np.resize(image, dim), tf.float32) / 255.0, -1)
+    image_np = tf.image.grayscale_to_rgb(image_np)
+    image_np = tf.expand_dims(image_np, 0)
+
+    return json.dumps({"instances": image_np.numpy().tolist()})
+
+
+if __name__ == "__main__":
+    data = build_request(sys.argv[1])
+
+    request = requests.post(
+        "http://localhost:8501/v1/models/smart-recycling/versions/1:predict", data=data
+    )
+
+    predictions = json.loads(request.text)["predictions"][0]
+    predictions = list(map(float, predictions))
+    labels = ["cardboard", "glass", "metal", "paper", "plastic", "trash"]
+    output = dict(zip(labels, predictions))
+
+    print(output)
