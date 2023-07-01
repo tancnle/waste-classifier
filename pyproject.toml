@@ -2,18 +2,17 @@
 name = "waste-classifier"
 version = "0.1.0"
 description = "Model serving service with TensorFlow serving"
-authors = ["Tan Le <tan.le@hey.com>"]
+authors = ["Tan Le <numbat@fastmail.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "waste_classifier"}]
 
 [tool.poetry.dependencies]
-python = ">=3.10,<3.11"
+python = ">=3.11,<3.12"
 requests = "^2.28.1"
 numpy = "^1.23.3"
 Pillow = "^9.2.0"
 tensorflow = "^2.10.0"
-
 
 [build-system]
 requires = ["poetry-core"]
