@@ -5,10 +5,8 @@ DOCKER_DIR := ${SOURCE_DIR}/docker
 DOCKER_CONFIG_TPL_DIR := ${DOCKER_DIR}/templates
 
 # Variables
-PYTHONPATH ?= ${SOURCE_DIR}/src
 MODEL_NAME ?= "smart-recycling"
 MODEL_VERSION ?= 1
-CONFIG_FILE ?= "config.json"
 MODEL_LABEL ?= "test"
 
 .PHONY: env
@@ -32,7 +30,7 @@ dockerize-model:
 		-e "s/{{model_label}}/${MODEL_LABEL}/g" \
 		 ${DOCKER_CONFIG_TPL_DIR}/model-serving.config.tpl > $@
 
-.PHONE: run
+.PHONY: run
 run:
 	docker run -it --rm -p 8501:8501 ${MODEL_NAME}:${MODEL_VERSION} \
 		--allow_version_labels_for_unavailable_models \
