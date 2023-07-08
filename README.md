@@ -6,7 +6,7 @@ Waste Classifier Service using TensorFlow Serving and a Deep Learning Model.
 
 ### Prerequisites
 
-- Python > 3.8
+- Python > 3.11
 - [Poetry](https://python-poetry.org/)
 - [Docker](https://www.docker.com/)
 
