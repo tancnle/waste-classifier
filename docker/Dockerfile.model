@@ -1,4 +1,4 @@
-FROM tensorflow/serving:2.12.1
+FROM tensorflow/serving:2.13.1
 
 # Define arguments to build the image
 ARG MODEL_NAME
