@@ -35,3 +35,18 @@ run:
 	docker run -it --rm -p 8501:8501 ${MODEL_NAME}:${MODEL_VERSION} \
 		--allow_version_labels_for_unavailable_models \
 		--model_config_file=/models/models.config
+
+.PHONY: lint
+lint: install-lint-deps
+	@echo "Linting..."
+	@poetry run ruff check ./predict
+
+.PHONY: format
+format: install-lint-deps
+	@echo "Formatting..."
+	@poetry run ruff format ./predict
+
+.PHONY: install-lint-deps
+install-lint-deps:
+	@echo "Installing lint dependencies..."
+	@poetry install --only lint || true
