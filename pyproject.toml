@@ -5,7 +5,6 @@ description = "Model serving service with TensorFlow serving"
 authors = ["Tan Le <numbat@fastmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "waste_classifier"}]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
@@ -14,6 +13,25 @@ numpy = "^1.23.3"
 Pillow = "^9.2.0"
 tensorflow = "^2.10.0"
 
+[tool.poetry.group.lint.dependencies]
+ruff = "^0.1.3"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+  "B",   # flake8-bugbear
+  "C",   # flake8-comprehensions
+  "E",   # pycodestyle errors
+  "F",   # pyflakes
+  "I",   # isort
+  "PL",  # pylint
+  "SIM", # flake8-simplify
+  "UP",  # pyupgrade
+  "W",   # pycodestyle warnings
+]

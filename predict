@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-import numpy as np
 import json
 import sys
+
+import numpy as np
 import requests
-
-from PIL import Image
 import tensorflow as tf
+from PIL import Image
 
 
-def build_request(image_path):
+def build_request(image_path: str) -> str:
     dim = (299, 299)
 
     image = Image.open(image_path)
@@ -31,7 +31,7 @@ if __name__ == "__main__":
     predictions = json.loads(request.text)["predictions"][0]
     predictions = list(map(float, predictions))
     labels = ["cardboard", "glass", "metal", "paper", "plastic", "trash"]
-    probabilities = dict(zip(labels, predictions))
+    probabilities = dict(zip(labels, predictions, strict=True))
 
     print(f"Probabilities: {probabilities}")
     print(f"Prediction: {max(probabilities, key=probabilities.get)}")
