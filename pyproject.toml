@@ -5,6 +5,7 @@ description = "Model serving service with TensorFlow serving"
 authors = ["Tan Le <numbat@fastmail.com>"]
 license = "MIT"
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.11,<3.12"
