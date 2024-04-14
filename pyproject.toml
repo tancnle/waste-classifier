@@ -13,6 +13,7 @@ requests = "^2.31.0"
 numpy = "^1.26.4"
 Pillow = "^10.3.0"
 tensorflow = "^2.16.1"
+rich = "^13.7.1"
 
 [tool.poetry.group.lint.dependencies]
 ruff = "^0.3.5"

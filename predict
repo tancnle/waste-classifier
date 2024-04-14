@@ -6,7 +6,9 @@ import sys
 import numpy as np
 import requests
 import tensorflow as tf
+
 from PIL import Image
+from rich import print
 
 
 def build_request(image_path: str) -> str:
@@ -33,5 +35,9 @@ if __name__ == "__main__":
     labels = ["cardboard", "glass", "metal", "paper", "plastic", "trash"]
     probabilities = dict(zip(labels, predictions, strict=True))
 
-    print(f"Probabilities: {probabilities}")
-    print(f"Prediction: {max(probabilities, key=probabilities.get)}")
+    print(
+        {
+            "probabilities": probabilities,
+            "prediction": max(probabilities, key=probabilities.get),
+        }
+    )
