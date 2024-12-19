@@ -44,6 +44,7 @@ lint: install-lint-deps
 .PHONY: format
 format: install-lint-deps
 	@echo "Formatting..."
+	@poetry run ruff check --fix ./predict
 	@poetry run ruff format ./predict
 
 .PHONY: install-lint-deps
