@@ -16,7 +16,7 @@ tensorflow = "^2.18.0"
 rich = "^14.0.0"
 
 [tool.poetry.group.lint.dependencies]
-ruff = "^0.11.6"
+ruff = "^0.11.8"
 
 [build-system]
 requires = ["poetry-core"]
