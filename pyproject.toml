@@ -1,26 +1,24 @@
-[tool.poetry]
+[project]
 name = "waste-classifier"
 version = "0.1.0"
-description = "Model serving service with TensorFlow serving"
-authors = ["Tan Le <numbat@fastmail.com>"]
-license = "MIT"
+description = "Waste classifier service using TensorFlow serving"
 readme = "README.md"
-package-mode = false
+license = "MIT"
+requires-python = ">=3.11,<3.12"
+authors = [{ name = "Tan Le", email = "numbat@fastmail.com" }]
+dependencies = [
+  "requests>=2.32.4",
+  "numpy>=2.3.5",
+  "Pillow>=11.3.0",
+  "tensorflow>=2.20.0",
+  "rich>=14.0.0",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.11,<3.12"
-requests = "^2.32.4"
-numpy = "^2.3.5"
-Pillow = "^11.3.0"
-tensorflow = "^2.20.0"
-rich = "^14.0.0"
+[project.optional-dependencies]
+lint = ["ruff>=0.14.7"]
 
-[tool.poetry.group.lint.dependencies]
-ruff = "^0.14.7"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+package = false
 
 [tool.ruff]
 target-version = "py311"
