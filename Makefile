@@ -39,15 +39,15 @@ run:
 .PHONY: lint
 lint: install-lint-deps
 	@echo "Linting..."
-	@poetry run ruff check ./predict
+	@uv run ruff check ./predict
 
 .PHONY: format
 format: install-lint-deps
 	@echo "Formatting..."
-	@poetry run ruff check --fix ./predict
-	@poetry run ruff format ./predict
+	@uv run ruff check --fix ./predict
+	@uv run ruff format ./predict
 
 .PHONY: install-lint-deps
 install-lint-deps:
 	@echo "Installing lint dependencies..."
-	@poetry install --only lint || true
+	@uv sync --extra lint

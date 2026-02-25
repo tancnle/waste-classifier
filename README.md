@@ -7,7 +7,7 @@ Waste Classifier Service using TensorFlow Serving and a Deep Learning Model.
 ### Prerequisites
 
 - Python > 3.11
-- [Poetry](https://python-poetry.org/)
+- [uv](https://docs.astral.sh/uv/)
 - [Docker](https://www.docker.com/)
 
 ### Building the service
@@ -15,7 +15,7 @@ Waste Classifier Service using TensorFlow Serving and a Deep Learning Model.
 Install dependencies
 
 ```shell
-poetry install
+uv sync
 ```
 
 Build the Docker container with embedded model
@@ -49,9 +49,9 @@ make format
 In another terminal window, send a HTTP request to fetch predictions
 
 ```shell
-$ poetry run ./predict samples/rubbish.jpg
+$ uv run ./predict samples/rubbish.jpg
 {'cardboard': 0.182600647, 'glass': 0.0151944431, 'metal': 0.0774555057, 'paper': 0.114754409, 'plastic': 0.0962073, 'trash': 0.513787746}
 
-$ poetry run ./predict samples/bottles.jpg
+$ uv run ./predict samples/bottles.jpg
 {'cardboard': 0.0585876703, 'glass': 0.0362069048, 'metal': 0.0567798503, 'paper': 0.0345257074, 'plastic': 0.0607169792, 'trash': 0.753182948}
 ```
